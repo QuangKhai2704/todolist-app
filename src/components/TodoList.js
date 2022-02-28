@@ -21,13 +21,14 @@ class TodoList extends React.Component {
   render() {
     const { todos } = this.props;
     return (
-      <div className="todoListContainer">
+      <div className="todoListContainer" >
         <input type="checkbox" onClick={this.selects} />
         Select all
         {todos.map((_todo, _index) => {
           return (
-            <div>
+            <div key={_index}>
               <input
+                
                 type="checkbox"
                 id={_index}
                 ref={(ref) => (this.todosRef[_index] = ref)}
