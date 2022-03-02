@@ -14,7 +14,6 @@ class AddTodos extends React.Component {
         className='addTodosContainer'>
             <form onSubmit={(e) => this.submitTodo(e)}>
                 <input id='addTodoInput' onChange={(e) => this.updateInput(e)} type='text'></input>
-                <button type='submit'>Add Todo</button>
             </form>
          </div>
         );

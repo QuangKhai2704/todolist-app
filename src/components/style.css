@@ -1,61 +1,74 @@
 html,
 body {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
-.TodoInput {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	background: none;
-	font-size: 100%;
-	vertical-align: baseline;
-	font-family: inherit;
-	font-weight: inherit;
-	color: inherit;
-	-webkit-appearance: none;
-	appearance: none;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
 
 body {
-	font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	line-height: 2em;
-	background-image: linear-gradient(to right, rgba(76, 0, 255, 0), rgb(0, 140, 255));
-	min-width: 300px;
-	max-width: 350px;
-	margin: 0 auto;
-	top:50px;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	font-weight: 300;
-	border: 6px solid  rgb(0, 0, 0);
-	border-radius: 15px ;
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 2em;
+    background-image: linear-gradient(to right, rgba(76, 0, 255, 0), rgb(0, 140, 255));
+    min-width: 300px;
+    max-width: 350px;
+    margin: 0 auto;
+    top:50px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 300;
+    border: 3px solid  rgb(0, 0, 0);
+    border-radius: 15px ;
 }
 
+#addTodoInput {
+	margin: 20px;
+	padding:15px;
+	width: 284px;
+	border: none;
+	border-bottom: 3px solid black;
+}
 
 .addTodosContainer {
-	padding: 16px 16px 16px 60px;
-	border: none;
-	background: rgba(0, 0, 0, 0.003);
-	box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
+    padding: 16px;
+    border: none;
 }
 
 .todoListContainer,
 html.todoItem:active {
-	position: relative;
-	line-height: 30px;
-	text-decoration: none;
-	cursor: pointer;
+    position: relative;
+    line-height: 30px;
+    text-decoration: none;
+    cursor: pointer;
+	bottom: 70px;
+    display:inline-block;
 }
 
-.todoListContainer:hover {
-	text-decoration: underline;
-}
 
 .todoItem {
+    position: relative;
+    left: 15px;
+    width: 308px;
+}
+
+.todoItemcompleted {
 	position: relative;
-	left: 15px;
+    left: 15px;
+    width: 308px;
+}
+
+.wrap {
+    padding:10px;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+    letter-spacing: 3px;
+}
+
+.wrapDelete {
+    position: relative;
+    top: 10px;
 }
