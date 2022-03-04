@@ -109,15 +109,9 @@ class App extends React.Component {
         <label htmlFor="todo">Chọn bộ lọc</label>
         <br />
         <div className="wrap">
-          <div value="All" onClick={this.filterClear}>
-          Tất cả
-          </div>
-          <div value="completed" onClick={this.filterTodoCompleted}>
-          Đã hoàn thành
-          </div>
-          <div value="notCompleted" onClick={this.filterTodoNotCompleted}>
-          Chưa hoàn thành
-          </div>
+          <input type="button" onClick={this.filterClear} value="Tất cả" />
+          <input type="button" onClick={this.filterTodoCompleted} value="Đã Hoàn Thành" />
+          <input type="button" onClick={this.filterTodoNotCompleted} value="Chưa Hoàn Thành" />
         </div>
       </div>
     );

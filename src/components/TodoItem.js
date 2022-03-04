@@ -29,14 +29,14 @@ class TodoItem extends React.Component {
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
-  render() {
+render() {
     const { todo } = this.props;
     return (
       <div>
         <input
           type="checkbox"
           checked={todo === null ? "" : todo.completed === true ? true : false}
-          onChange={this.handleTick}
+          onClick={this.handleTick}
         />
         <label onClick={this.toggleTodo}>
           <input
@@ -50,6 +50,10 @@ class TodoItem extends React.Component {
             ref={this.wrapperRef}
             disabled={this.state.disabled}
           />
+          <div className="deletebutton">
+            <input type="button" onClick={this.handleDelete} value="XÓA" />
+          </div>
+          
         </label>
       </div>
     );

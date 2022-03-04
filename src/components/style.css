@@ -10,8 +10,9 @@ body {
     line-height: 2em;
     background-image: linear-gradient(to right, rgba(76, 0, 255, 0), rgb(0, 140, 255));
     min-width: 300px;
-    max-width: 350px;
+    max-width: 400px;
     margin: 0 auto;
+	padding: 50px;
     top:50px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -19,11 +20,16 @@ body {
     border: 3px solid  rgb(0, 0, 0);
     border-radius: 15px ;
 }
+h1 {
+    position: relative;
+    display: inline-block;
+    font-size: 270%;
+}
 
 #addTodoInput {
-	margin: 20px;
-	padding:15px;
-	width: 284px;
+	margin: 24px;
+	padding:17px;
+	width: 375px;
 	border: none;
 	border-bottom: 3px solid black;
 }
@@ -46,18 +52,24 @@ html.todoItem:active {
 
 .todoItem {
     position: relative;
+	padding:12px;
     left: 15px;
-    width: 308px;
+    width: 303px;
+	margin:2px;
 }
 
 .todoItemcompleted {
 	position: relative;
+	padding:12px;
     left: 15px;
-    width: 308px;
+    width: 303px;
+	margin:2px;
 }
 
 .wrap {
-    padding:10px;
+    position: relative;
+    left:20px;
+    padding:30px;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
@@ -65,10 +77,11 @@ html.todoItem:active {
     -webkit-align-items: center;
     -webkit-box-align: center;
     align-items: center;
-    letter-spacing: 3px;
+    
 }
 
-.wrapDelete {
+.deletebutton {
     position: relative;
-    top: 10px;
+    display: inline-block;
+    left:20px;
 }

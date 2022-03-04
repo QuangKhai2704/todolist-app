@@ -11,8 +11,10 @@ class AddTodos extends React.Component {
     render() {
         return(
         <div
+    
         className='addTodosContainer'>
             <form onSubmit={(e) => this.submitTodo(e)}>
+                <h1>Kế hoạch hôm nay ? </h1>
                 <input id='addTodoInput' onChange={(e) => this.updateInput(e)} type='text'></input>
             </form>
          </div>

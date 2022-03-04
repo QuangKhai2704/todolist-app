@@ -34,13 +34,6 @@ class TodoList extends React.Component {
             </div>
           );
         })}
-        <div className="wrapDelete">
-          <input
-            type="button"
-            value={"Delete All"}
-            onClick={this.handleDeleteAll}
-          />
-        </div>
       </div>
     );
   }
