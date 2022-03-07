@@ -26,7 +26,7 @@ class TodoList extends React.Component {
         Select all
         {todos.map((_todo, _index) => {
           return (
-            <div>
+            <div key={_index}>
               <input
                 type="checkbox"
                 id={_index}
