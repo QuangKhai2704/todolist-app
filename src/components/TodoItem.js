@@ -13,9 +13,14 @@ class TodoItem extends React.Component {
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleTick = this.handleTick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleFocus() {
     this.setState({ disabled: !this.disable });
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setState({ disabled: true });
   }
 
   handleClickOutside(event) {
@@ -29,15 +34,21 @@ class TodoItem extends React.Component {
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
-render() {
+  render() {
     const { todo } = this.props;
     return (
-      <div>
-        <input
-          type="checkbox"
-          checked={todo === null ? "" : todo.completed === true ? true : false}
-          onClick={this.handleTick}
-        />
+      <form onSubmit={this.handleSubmit}>
+        <div className="checkbox-wrapper">
+          <input
+            id={`${todo.uuid}`}
+            type="checkbox"
+            checked={
+              todo === null ? "" : todo.completed === true ? true : false
+            }
+            onChange={this.handleTick}
+          />
+          <label htmlFor={`${todo.uuid}`}></label>
+        </div>
         <label onClick={this.toggleTodo}>
           <input
             type="text"
@@ -51,15 +62,13 @@ render() {
             disabled={this.state.disabled}
           />
           <div className="deletebutton">
-            <input type="button" onClick={this.handleDelete} value="XÓA" />
+            <input type="button" onClick={this.handleDelete} value="X" />
           </div>
-          
         </label>
-      </div>
+      </form>
     );
   }
   toggleTodo = () => {
-    this.props.updateTodoFn(this.props.todo);
     this.handleFocus();
   };
   handleUpdate = (e) => {
