@@ -3,6 +3,17 @@ import AddTodos from "./components/AddTodos";
 import React from "react";
 import FilterTodo from "./components/FilterTodo";
 import { v4 as uuidv4 } from "uuid";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+import NotCompleted from "./components/NotCompleted";
+
+
+/*function App() {
+  const [todos, setTodos] = useState([]);
+  const [todoFilter, setTodoFilter] = useState([]);
+  const [trigger, setTrigger] = useState(false);
+  return <div>App</div>;
+}*/
 
 class App extends React.Component {
   constructor() {
@@ -23,12 +34,13 @@ class App extends React.Component {
       if (todo === kaka)
         return {
           text: todo.text,
-          completed: todo.completed === true ? false : true,
+          completed: !todo.completed,
           uuid: uuid,
         };
       else return todo;
     });
     await this.setState({ todos: newApp });
+    console.log(newApp);
     localStorage.setItem("todos", JSON.stringify(this.state.todos));
   };
   selects = async () => {
@@ -48,24 +60,20 @@ class App extends React.Component {
     const uuid = uuidv4();
     const newFix = this.state.todos.map((_todo) => {
       if (_todo.uuid === tada.uuid)
-        return { completed: false, text: todo, uuid: uuid };
+        return { completed: _todo.completed, text: todo, uuid: uuid };
       else return _todo;
     });
     await this.setState({ todos: newFix });
     localStorage.setItem("todos", JSON.stringify(this.state.todos));
   };
   handleDelete = async (hahaha) => {
-    const index = this.state.todos.indexOf(hahaha);
-    const newFix = this.state.todos.splice(index, 1);
-
+    
+    const newFix = this.state.todos.filter((todo) => todo !== hahaha);
+    
     await this.setState({ todos: newFix });
     localStorage.setItem("todos", JSON.stringify(this.state.todos));
   };
-  handleDeleteAll = async () => {
-    const newFix = this.state.todos.filter((todo) => todo.completed === false);
-    await this.setState({ todos: newFix });
-    localStorage.setItem("todos", JSON.stringify(this.state.todos));
-  };
+  
   filterClear = () => {
     this.setState({ todoFilter: [] });
   };
@@ -75,7 +83,7 @@ class App extends React.Component {
       else return "";
     });
     await this.setState({ todoFilter: todoCompleted });
-
+    console.log(this.state.todoFilter);
   };
   filterTodoNotCompleted = async () => {
     const todoNotCompleted = this.state.todos.map((todo) => {
@@ -83,7 +91,76 @@ class App extends React.Component {
       else return "";
     });
     await this.setState({ todoFilter: todoNotCompleted });
+    console.log(this.state.todoFilter);
   };
+  render() {
+    return (
+      <Router>
+        <AddTodos addTodoFn={this.addTodo}></AddTodos>
+       <div className="wrap">
+        <label htmlFor="todo">Chọn bộ lọc</label>
+          <ul>
+            <li id="All">
+              <Link to="/">Tất cả</Link>
+            </li>
+            <li id="completed">
+              <Link to="/active">Đã hoàn thành</Link>
+            </li>
+            <li id="notCompleted">
+              <Link to="/inactive">Chưa hoàn thành</Link>
+            </li>
+          </ul>
+        </div>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <TodoList
+                updateTodoFn={this.updateTodo}
+                handleUpdate={this.handleUpdate}
+                handleDelete={this.handleDelete}
+                selects={this.selects}
+                handleTick={this.handleTick}
+                handleDeleteAll={this.handleDeleteAll}
+                trigger={this.state.trigger}
+                todos={this.state.todos}
+              />
+            }
+          ></Route>
+          <Route
+            path="/active"
+            element={
+              <FilterTodo
+                todoFilter={this.state.todos}
+                updateTodoFn={this.updateTodo}
+                handleUpdate={this.handleUpdate}
+                handleDelete={this.handleDelete}
+                selects={this.selects}
+                handleTick={this.handleTick}
+                handleDeleteAll={this.handleDeleteAll}
+                trigger={this.state.trigger}
+              />
+            }
+          ></Route>
+          <Route
+            path="/inactive"
+            element={
+              <NotCompleted
+                todoFilter={this.state.todos}
+                updateTodoFn={this.updateTodo}
+                handleUpdate={this.handleUpdate}
+                handleDelete={this.handleDelete}
+                selects={this.selects}
+                handleTick={this.handleTick}
+                handleDeleteAll={this.handleDeleteAll}
+                trigger={this.state.trigger}
+              />
+            }
+          ></Route>
+        </Routes>
+      </Router>
+    );
+  }
 
   componentDidMount = () => {
     const todos = localStorage.getItem("todos");
@@ -94,14 +171,14 @@ class App extends React.Component {
       console.log("No todos");
     }
   };
-  addTodo = async (todo, completed) => {
+  addTodo = async (todo) => {
     const uuid = uuidv4();
     await this.setState({
       todos: [
         ...this.state.todos,
         {
           text: todo,
-          completed: completed,
+          completed: false,
           uuid: uuid,
         },
       ],
@@ -154,5 +231,4 @@ class App extends React.Component {
     );
   }
 }
-
 export default App;

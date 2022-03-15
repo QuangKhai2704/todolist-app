@@ -1,8 +1,8 @@
-import React from "react";
-import TodoItem from "../components/TodoItem";
-import { v4 as uuidv4 } from "uuid";
+import React, { Component } from "react";
+import { Fragment } from "react/cjs/react.production.min";
+import TodoItem from "./TodoItem";
 
-class TodoList extends React.Component {
+export default class NotCompleted extends Component {
   constructor(props) {
     super(props);
     this.state = { checked: true };
@@ -13,40 +13,6 @@ class TodoList extends React.Component {
   }
   selects() {
     this.props.selects();
-  }
-
-  render() {
-    const uuid = uuidv4();
-    const { todos } = this.props;
-    return (
-      <div className="todoListContainer">
-        <div className="checkbox-wrapper"><input
-          type="checkbox"
-          id="xyz"
-          onChange={this.selects}
-          checked={this.props.trigger ? true : false}
-        />
-        <label htmlFor="xyz"></label></div>
-        
-        
-        {todos.map((_todo, _index) => {
-          return (
-            <div key={_index}>
-              <label htmlFor={_index}></label>
-              <TodoItem
-                updateTodoFn={this.updateTodo}
-                handleUpdate={this.handleUpdate}
-                handleDelete={this.handleDelete}
-                handleTick={this.handleTick}
-                id={uuid}
-                key={_index}
-                todo={_todo}
-              ></TodoItem>
-            </div>
-          );
-        })}
-      </div>
-    );
   }
   updateTodo = (todo) => {
     this.props.updateTodoFn(todo);
@@ -63,6 +29,38 @@ class TodoList extends React.Component {
   handleDeleteAll = () => {
     this.props.handleDeleteAll();
   };
-}
+  render() {
+    const { todoFilter } = this.props;
 
-export default TodoList;
+    return (
+      <div className="todoListContainer">
+        <div className="checkbox-wrapper"><input
+          type="checkbox"
+          id="qwe"
+          onChange={this.selects}
+          checked={this.props.trigger ? true : false}
+        />
+        <label htmlFor="qwe"></label></div>
+        {todoFilter.map((_todoFilter, _index) =>
+          _todoFilter === "" ? (
+            <Fragment key={_index} />
+          ) : _todoFilter.completed === false ? (
+            <div key={_index}>
+              <label htmlFor={_index}></label>
+              <TodoItem
+                updateTodoFn={this.updateTodo}
+                handleUpdate={this.handleUpdate}
+                handleDelete={this.handleDelete}
+                handleTick={this.handleTick}
+                key={_index}
+                todo={_todoFilter}
+              ></TodoItem>
+            </div>
+          ) : (
+            <Fragment key={_index} />
+          )
+        )}
+      </div>
+    );
+  }
+}

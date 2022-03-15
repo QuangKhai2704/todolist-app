@@ -13,9 +13,14 @@ class TodoItem extends React.Component {
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleTick = this.handleTick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleFocus() {
     this.setState({ disabled: !this.disable });
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setState({ disabled: true });
   }
 
   handleClickOutside(event) {
@@ -29,43 +34,41 @@ class TodoItem extends React.Component {
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
-render() {
+  render() {
     const { todo } = this.props;
     return (
-      <li>
-        <div style={{marginLeft: "4px"}}>
+      <form onSubmit={this.handleSubmit}>
+        <div className="checkbox-wrapper">
           <input
+            id={`${todo.uuid}`}
             type="checkbox"
-            checked={todo === null ? "" : todo.completed === true ? true : false}
-            onClick={this.handleTick}
+            checked={
+              todo === null ? "" : todo.completed === true ? true : false
+            }
+            onChange={this.handleTick}
           />
+          <label htmlFor={`${todo.uuid}`}></label>
         </div>
-        <div>
-          <label onClick={this.toggleTodo}>
-            {this.props.todo.text}
-          </label>
-          {/* <input
-              type="text"
-              className={
-                "todoItem" +
-                (todo === null ? "" : todo.completed ? "completed" : "")
-              }
-              value={todo === null ? "" : this.props.todo.text}
-              onChange={this.handleUpdate}
-              ref={this.wrapperRef}
-              disabled={this.state.disabled}
-            /> */}
-        </div>
-        <div style={{marginRight: "24px"}}>
+        <label onClick={this.toggleTodo}>
+          <input
+            type="text"
+            className={
+              "todoItem" +
+              (todo === null ? "" : todo.completed ? "completed" : "")
+            }
+            value={todo === null ? "" : this.props.todo.text}
+            onChange={this.handleUpdate}
+            ref={this.wrapperRef}
+            disabled={this.state.disabled}
+          />
           <div className="deletebutton">
-            <input type="button" onClick={this.handleDelete} value="XÓA" />
+            <input type="button" onClick={this.handleDelete} value="X" />
           </div>
-        </div>
-      </li>
+        </label>
+      </form>
     );
   }
   toggleTodo = () => {
-    this.props.updateTodoFn(this.props.todo);
     this.handleFocus();
   };
   handleUpdate = (e) => {
