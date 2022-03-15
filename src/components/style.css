@@ -36,13 +36,13 @@ body {
 }
 
 .addTodosContainer {
-    padding: 16px;
     border: none;
 }
 
 .todoListContainer,
 html.todoItem:active {
     line-height: 30px;
+    width: 100%;
     text-decoration: none;
     cursor: pointer;
     display:inline-block;
@@ -50,32 +50,33 @@ html.todoItem:active {
 
 
 .todoItem {
-    position: relative;
-	  padding:12px;
-    left: 15px;
-    width: 238px;
-	  margin:2px;
-}
-
-.todoItemcompleted {
-	position: relative;
 	padding:12px;
-    left: 15px;
-    width: 238px;
+    width: 307px;
 	margin:2px;
 }
 
+.todoItemcompleted {
+	padding: 12px;
+    width: 307px;
+    margin: 2px;
+}
+
 .wrap {
-    padding: 30px;
+    padding: 11px;
+    border-top: 1px solid #ccc;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
+button {
+    margin-right: 10px;
+}
+
 .deletebutton {
-    position: relative;
+    /* position: relative;
     display: inline-block;
-    left:20px;
+    left:20px; */
 }
 
 input:focus,

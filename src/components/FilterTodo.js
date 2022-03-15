@@ -32,7 +32,8 @@ export default class FilterTodo extends Component {
   render() {
     const { todoFilter } = this.props;
     return (
-      <div className="todoListContainer"><div className="checkbox-wrapper">
+      <div className="todoListContainer">
+        <div className="checkbox-wrapper">
         <input
           type="checkbox"
           id="abc"
