@@ -32,30 +32,36 @@ class TodoItem extends React.Component {
 render() {
     const { todo } = this.props;
     return (
-      <div>
-        <input
-          type="checkbox"
-          checked={todo === null ? "" : todo.completed === true ? true : false}
-          onClick={this.handleTick}
-        />
-        <label onClick={this.toggleTodo}>
+      <li>
+        <div style={{marginLeft: "4px"}}>
           <input
-            type="text"
-            className={
-              "todoItem" +
-              (todo === null ? "" : todo.completed ? "completed" : "")
-            }
-            value={todo === null ? "" : this.props.todo.text}
-            onChange={this.handleUpdate}
-            ref={this.wrapperRef}
-            disabled={this.state.disabled}
+            type="checkbox"
+            checked={todo === null ? "" : todo.completed === true ? true : false}
+            onClick={this.handleTick}
           />
+        </div>
+        <div>
+          <label onClick={this.toggleTodo}>
+            {this.props.todo.text}
+          </label>
+          {/* <input
+              type="text"
+              className={
+                "todoItem" +
+                (todo === null ? "" : todo.completed ? "completed" : "")
+              }
+              value={todo === null ? "" : this.props.todo.text}
+              onChange={this.handleUpdate}
+              ref={this.wrapperRef}
+              disabled={this.state.disabled}
+            /> */}
+        </div>
+        <div style={{marginRight: "24px"}}>
           <div className="deletebutton">
             <input type="button" onClick={this.handleDelete} value="XÓA" />
           </div>
-          
-        </label>
-      </div>
+        </div>
+      </li>
     );
   }
   toggleTodo = () => {

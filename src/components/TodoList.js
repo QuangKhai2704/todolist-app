@@ -17,24 +17,27 @@ class TodoList extends React.Component {
   render() {
     const { todos } = this.props;
     return (
-      <div className="todoListContainer">
-        <input type="checkbox" onChange={this.selects} checked={this.props.trigger?true:false} />
-        {todos.map((_todo, _index) => {
-          return (
-            <div key={_index}>
-              <label htmlFor={_index}></label>
+        // {/* <input type="checkbox" onChange={this.selects} checked={this.props.trigger?true:false} /> */}
+        <section className="main">
+        <ul className="todo-list">
+          {todos.map((_todo, _index) => {
+            return (
+              // <div key={_index}>
+              //   {/* <label htmlFor={_index}></label> */}
+                
+              // </div>
               <TodoItem
-                updateTodoFn={this.updateTodo}
-                handleUpdate={this.handleUpdate}
-                handleDelete={this.handleDelete}
-                handleTick={this.handleTick}
-                key={_index}
-                todo={_todo}
-              ></TodoItem>
-            </div>
-          );
-        })}
-      </div>
+              updateTodoFn={this.updateTodo}
+              handleUpdate={this.handleUpdate}
+              handleDelete={this.handleDelete}
+              handleTick={this.handleTick}
+              key={_index}
+              todo={_todo}
+            ></TodoItem>
+            );
+          })}
+        </ul>
+        </section>
     );
   }
   updateTodo = (todo) => {

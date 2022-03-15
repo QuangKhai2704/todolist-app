@@ -10,13 +10,22 @@ class AddTodos extends React.Component {
     }
     render() {
         return(
-        <div
-    
-        className='addTodosContainer'>
-            <form onSubmit={(e) => this.submitTodo(e)}>
-                <h1>Kế hoạch hôm nay ? </h1>
-                <input id='addTodoInput' onChange={(e) => this.updateInput(e)} type='text'></input>
-            </form>
+        <div className='addTodosContainer'>
+             <h1 style={{width: "100%", textAlign: 'center'}}>Todos </h1>
+             <div style={{display: 'flex'}}>
+                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <input className="toggle-all" type="checkbox" />
+                    <label
+                        htmlFor="toggle-all"
+                        onClick={this.props.handleToggleAll}
+                    ></label>
+                 </div>
+                 <div style={{flex: 1}}>
+                    <form onSubmit={(e) => this.submitTodo(e)}>
+                        <input id='addTodoInput' onChange={(e) => this.updateInput(e)} type='text'></input>
+                    </form>
+                 </div>
+             </div>
          </div>
         );
     }

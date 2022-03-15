@@ -84,38 +84,6 @@ class App extends React.Component {
     });
     await this.setState({ todoFilter: todoNotCompleted });
   };
-  render() {
-    return (
-      <div>
-        <AddTodos addTodoFn={this.addTodo}></AddTodos>
-        {this.state.todoFilter.length === 0 ? (
-          <div>
-            <TodoList
-              updateTodoFn={this.updateTodo}
-              handleUpdate={this.handleUpdate}
-              handleDelete={this.handleDelete}
-              selects={this.selects}
-              handleTick={this.handleTick}
-              handleDeleteAll={this.handleDeleteAll}
-              trigger={this.state.trigger}
-              todos={this.state.todos}
-            ></TodoList>
-          </div>
-        ) : (
-          <div>
-            <FilterTodo todoFilter={this.state.todoFilter} />
-          </div>
-        )}
-        <label htmlFor="todo">Chọn bộ lọc</label>
-        <br />
-        <div className="wrap">
-          <input type="button" onClick={this.filterClear} value="Tất cả" />
-          <input type="button" onClick={this.filterTodoCompleted} value="Đã Hoàn Thành" />
-          <input type="button" onClick={this.filterTodoNotCompleted} value="Chưa Hoàn Thành" />
-        </div>
-      </div>
-    );
-  }
 
   componentDidMount = () => {
     const todos = localStorage.getItem("todos");
@@ -154,6 +122,37 @@ class App extends React.Component {
     await this.setState({ todos: newTodos });
     localStorage.setItem("todos", JSON.stringify(this.state.todos));
   };
+
+  render() {
+    return (
+      <div>
+        <AddTodos addTodoFn={this.addTodo}></AddTodos>
+        {this.state.todoFilter.length === 0 ? (
+           <TodoList
+           updateTodoFn={this.updateTodo}
+           handleUpdate={this.handleUpdate}
+           handleDelete={this.handleDelete}
+           selects={this.selects}
+           handleTick={this.handleTick}
+           handleDeleteAll={this.handleDeleteAll}
+           trigger={this.state.trigger}
+           todos={this.state.todos}
+         ></TodoList>
+        ) : (
+          <div>
+            <FilterTodo todoFilter={this.state.todoFilter} />
+          </div>
+        )}
+        <div>
+          <div className="wrap">
+            <input type="button" onClick={this.filterClear} value="All" />
+            <input type="button" onClick={this.filterTodoCompleted} value="Completed" />
+            <input type="button" onClick={this.filterTodoNotCompleted} value="Active" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
