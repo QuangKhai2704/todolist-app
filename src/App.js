@@ -106,6 +106,7 @@ class App extends React.Component {
       todoToShow: s,
     });
   };
+  
 
   render() {
     let todos = filterItem(this.state.todos, this.state.todoToShow);
