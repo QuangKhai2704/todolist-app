@@ -1,4 +1,4 @@
-/* html,
+html,
 body {
     margin: 0;
     padding: 0;
@@ -22,9 +22,11 @@ body {
 }
 
 #addTodoInput {
-
+	/* margin: 24px;
+	padding:17px;
+	width: 375px; */
 	border: none;
-	
+	/* border-bottom: 3px solid black; */
     width: 100%;
     border-radius: 6px;
     padding-top: 12px;
@@ -142,127 +144,4 @@ button:focus {
     background-position-x: 2rem; 
     line-height: 1.2;
     transition: color 0.4s;
-  } */
-
-
-
-
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-      'Lucida Sans', Arial, sans-serif;
-  }
-  
-  body {
-    background: linear-gradient(
-      90deg,
-      rgb(134, 233, 240) 50%,
-      rgb(45, 160, 236) 100%
-    );
-  }
-  .todo-app {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    width: 520px;
-    min-height: 600px;
-    background: #ffffff;
-    text-align: center;
-    margin: 128px auto;
-    border: 3px solid black;
-    border-radius: 10px;
-    padding-bottom: 32px;
-  }
-  
-  h1 {
-    margin: 32px 0;
-    color: black;
-    font-size: 24px;
-  }
-  
-  .complete {
-    text-decoration: line-through;
-    opacity: 0.5;
-  }
-  
-  .todo-form {
-    margin-bottom: 32px;
-  }
-  
-  .todo-input {
-    padding: 14px 32px 14px 16px;
-    border-radius: 4px 0 0 4px;
-    border: 2px solid black;
-    outline: none;
-    width: 320px;
-    background: transparent;
-    color: black;
-  }
-  
-  .todo-input::placeholder {
-    color: #e2e2e2;
-  }
-  
-  .todo-button {
-    padding: 16px;
-    border: 1px solid black;
-    cursor: pointer;
-    outline: none;
-    color: rgb(0, 0, 0);
-    text-transform: capitalize;
-  }
-  
-  .todo-input.edit {
-    border: 2px solid black;
-  }
-  
-  .todo-button.edit {
-    background: linear-gradient(
-      90deg,
-      
-      rgb(61, 34, 34) 100%
-    );
-    padding: 16px 22px;
-  }
-  
-  .todo-container {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-  }
-  
-  .todo-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 4px auto;
-    color: black;
-    background: linear-gradient(
-      90deg,
-      rgb(63, 20, 255) 50%,
-      rgb(140, 17, 255) 100%
-    );
-  
-    padding: 16px;
-    border-radius: 5px;
-    width: 90%;
-  }
-  
-  
-  .icons {
-    display: flex;
-    align-items: center;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  .delete-icon {
-    margin-right: 5px;
-    color: black;
-  }
-  
-  .edit-icon {
-    color: black;
   }

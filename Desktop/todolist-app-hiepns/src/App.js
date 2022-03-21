@@ -1,9 +1,7 @@
-/* import TodoList from "./components/TodoList";
+import TodoList from "./components/TodoList";
 import AddTodos from "./components/AddTodos";
 import React from "react";
-import FilterTodo from "./components/FilterTodo";
 import { v4 as uuidv4 } from "uuid";
-import NotCompleted from "./components/NotCompleted";
 
 
 const filterItem = (items = [], status = "") => {
@@ -186,19 +184,4 @@ class App extends React.Component {
     localStorage.setItem("todos", JSON.stringify(this.state.todos));
   };
 }
-export default App;
- */
-
-import React from 'react';
-import './style.css';
-import TodoList from './TodoList';
-
-function App() {
-  return (
-    <div className='todo-app'>
-      <TodoList />
-    </div>
-  );
-}
-
 export default App;

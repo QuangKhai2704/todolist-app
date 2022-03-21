@@ -1,4 +1,4 @@
-/* import React, { Component } from "react";
+import React, { Component } from "react";
 import { Fragment } from "react/cjs/react.production.min";
 import TodoItem from "./TodoItem";
 
@@ -64,4 +64,3 @@ export default class NotCompleted extends Component {
     );
   }
 }
- */
