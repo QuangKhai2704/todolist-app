@@ -37,7 +37,7 @@ class TodoItem extends React.Component {
   render() {
     const { todo } = this.props;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <div className="checkbox-wrapper">
           <input
             id={`${todo.uuid}`}
@@ -49,7 +49,7 @@ class TodoItem extends React.Component {
           />
           <label htmlFor={`${todo.uuid}`}></label>
         </div>
-        <label onClick={this.toggleTodo}>
+        <div onClick={this.toggleTodo} style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
           <input
             type="text"
             className={
@@ -60,11 +60,11 @@ class TodoItem extends React.Component {
             onChange={this.handleUpdate}
             ref={this.wrapperRef}
             disabled={this.state.disabled}
-          />
+          />  
           <div className="deletebutton">
             <input type="button" onClick={this.handleDelete} value="X" />
-          </div>
-        </label>
+          </div> 
+        </div>
       </form>
     );
   }

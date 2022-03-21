@@ -20,19 +20,11 @@ class TodoList extends React.Component {
     const { todos } = this.props;
     return (
       <div className="todoListContainer">
-        <div className="checkbox-wrapper"><input
-          type="checkbox"
-          id="xyz"
-          onChange={this.selects}
-          checked={this.props.trigger ? true : false}
-        />
-        <label htmlFor="xyz"></label></div>
-        
+
         
         {todos.map((_todo, _index) => {
           return (
             <div key={_index}>
-              <label htmlFor={_index}></label>
               <TodoItem
                 updateTodoFn={this.updateTodo}
                 handleUpdate={this.handleUpdate}

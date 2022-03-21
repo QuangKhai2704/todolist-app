@@ -1,27 +1,30 @@
 import TodoList from "./components/TodoList";
 import AddTodos from "./components/AddTodos";
 import React from "react";
-import FilterTodo from "./components/FilterTodo";
 import { v4 as uuidv4 } from "uuid";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-
-import NotCompleted from "./components/NotCompleted";
 
 
-/*function App() {
-  const [todos, setTodos] = useState([]);
-  const [todoFilter, setTodoFilter] = useState([]);
-  const [trigger, setTrigger] = useState(false);
-  return <div>App</div>;
-}*/
+const filterItem = (items = [], status = "") => {
+  switch (status) {
+    case "all":
+      return items;
+    case "active":
+      return items.filter((todo) => !todo.completed);
+    case "complete":
+      return items.filter((todo) => todo.completed);
+    default:
+      return items;
+  }
+};
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       todos: [],
       todoFilter: [],
       trigger: false,
+      todoToShow: "all"
     };
     this.filterTodoCompleted = this.filterTodoCompleted.bind(this);
     this.filterClear = this.filterClear.bind(this);
@@ -93,72 +96,53 @@ class App extends React.Component {
     await this.setState({ todoFilter: todoNotCompleted });
     console.log(this.state.todoFilter);
   };
+
+  updateTodoToShow = (s) => {
+    this.setState({
+      todoToShow: s,
+    });
+  };
+  
+
   render() {
+    let todos = filterItem(this.state.todos, this.state.todoToShow);
+
     return (
-      <Router>
+      <div>
         <AddTodos addTodoFn={this.addTodo}></AddTodos>
-       <div className="wrap">
-        <label htmlFor="todo">Chọn bộ lọc</label>
-          <ul>
-            <li id="All">
-              <Link to="/">Tất cả</Link>
-            </li>
-            <li id="completed">
-              <Link to="/active">Đã hoàn thành</Link>
-            </li>
-            <li id="notCompleted">
-              <Link to="/inactive">Chưa hoàn thành</Link>
-            </li>
-          </ul>
+        <TodoList
+          updateTodoFn={this.updateTodo}
+          handleUpdate={this.handleUpdate}
+          handleDelete={this.handleDelete}
+          selects={this.selects}
+          handleTick={this.handleTick}
+          handleDeleteAll={this.handleDeleteAll}
+          trigger={this.state.trigger}
+          todos={todos}
+        />
+
+        <div className="wrap">
+          <div>
+            Todos left:{" "}
+            {this.state.todos.filter((todo) => !todo.completed).length}
+          </div>
+          <div>
+            <button onClick={() => this.updateTodoToShow("all")}>All</button>
+            <button onClick={() => this.updateTodoToShow("active")}>
+              Active
+            </button>
+            <button onClick={() => this.updateTodoToShow("complete")}>
+              Completed
+            </button>
+            {this.state.todos.some((todo) => todo.complete) ? (
+              <button onClick={this.removeAllTodosThatAreComplete}>
+                {" "}
+                Remove all
+              </button>
+            ) : null}
+          </div>
         </div>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <TodoList
-                updateTodoFn={this.updateTodo}
-                handleUpdate={this.handleUpdate}
-                handleDelete={this.handleDelete}
-                selects={this.selects}
-                handleTick={this.handleTick}
-                handleDeleteAll={this.handleDeleteAll}
-                trigger={this.state.trigger}
-                todos={this.state.todos}
-              />
-            }
-          ></Route>
-          <Route
-            path="/active"
-            element={
-              <FilterTodo
-                todoFilter={this.state.todos}
-                updateTodoFn={this.updateTodo}
-                handleUpdate={this.handleUpdate}
-                handleDelete={this.handleDelete}
-                selects={this.selects}
-                handleTick={this.handleTick}
-                handleDeleteAll={this.handleDeleteAll}
-                trigger={this.state.trigger}
-              />
-            }
-          ></Route>
-          <Route
-            path="/inactive"
-            element={
-              <NotCompleted
-                todoFilter={this.state.todos}
-                updateTodoFn={this.updateTodo}
-                handleUpdate={this.handleUpdate}
-                handleDelete={this.handleDelete}
-                selects={this.selects}
-                handleTick={this.handleTick}
-                handleDeleteAll={this.handleDeleteAll}
-                trigger={this.state.trigger}
-              />
-            }
-          ></Route>
-        </Routes>
-      </Router>
+      </div>
     );
   }
 
@@ -183,7 +167,7 @@ class App extends React.Component {
         },
       ],
     });
-    localStorage.setItem("todo", JSON.stringify(this.state.todos));
+    localStorage.setItem("todos", JSON.stringify(this.state.todos));
   };
   updateTodo = async (todo) => {
     const uuid = uuidv4();
