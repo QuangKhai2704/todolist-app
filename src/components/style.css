@@ -73,11 +73,6 @@ button {
     margin-right: 10px;
 }
 
-.deletebutton {
-    /* position: relative;
-    display: inline-block;
-    left:20px; */
-}
 
 input:focus,
 select:focus,

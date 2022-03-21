@@ -14,11 +14,14 @@ class AddTodos extends React.Component {
              <h1 style={{width: "100%", textAlign: 'center'}}>Todos </h1>
              <div style={{display: 'flex'}}>
                  <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                    <input className="toggle-all" type="checkbox" />
-                    <label
-                        htmlFor="toggle-all"
-                        onClick={this.props.handleToggleAll}
-                    ></label>
+                 {<div className="checkbox-wrapper">
+                    <input
+                    type="checkbox"
+                    id="xyz"
+                    onChange={this.selects}
+            />
+          <label htmlFor="xyz"></label>
+        </div> }
                  </div>
                  <div style={{flex: 1}}>
                     <form onSubmit={(e) => this.submitTodo(e)}>

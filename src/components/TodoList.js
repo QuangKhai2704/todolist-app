@@ -21,15 +21,6 @@ class TodoList extends React.Component {
     return (
       <div className="todoListContainer">
 
-        {/* <div className="checkbox-wrapper">
-          <input
-          type="checkbox"
-          id="xyz"
-          onChange={this.selects}
-          checked={this.props.trigger ? true : false}
-          />
-          <label htmlFor="xyz"></label>
-        </div> */}
         
         {todos.map((_todo, _index) => {
           return (

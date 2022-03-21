@@ -1,11 +1,7 @@
 import TodoList from "./components/TodoList";
 import AddTodos from "./components/AddTodos";
 import React from "react";
-import FilterTodo from "./components/FilterTodo";
 import { v4 as uuidv4 } from "uuid";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-
-import NotCompleted from "./components/NotCompleted";
 
 
 const filterItem = (items = [], status = "") => {
