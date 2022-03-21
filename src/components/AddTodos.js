@@ -2,12 +2,18 @@ import React from "react";
 
 class AddTodos extends React.Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             todo:''
         };
+        this.selectCheckBox = this.selectCheckBox.bind(this);
     }
+
+    selectCheckBox = () => {
+        this.props.checkAll();
+    };
+
     render() {
         return(
         <div className='addTodosContainer'>
@@ -16,10 +22,11 @@ class AddTodos extends React.Component {
                  <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                  {<div className="checkbox-wrapper">
                     <input
-                    type="checkbox"
-                    id="xyz"
-                    onChange={this.selects}
-            />
+                        type="checkbox"
+                        id="xyz"
+                        onChange={this.selectCheckBox}
+                        on
+                    />
           <label htmlFor="xyz"></label>
         </div> }
                  </div>

@@ -24,13 +24,26 @@ class App extends React.Component {
       todos: [],
       todoFilter: [],
       trigger: false,
-      todoToShow: "all"
+      todoToShow: "all",
+      checkAll: true
     };
     this.filterTodoCompleted = this.filterTodoCompleted.bind(this);
     this.filterClear = this.filterClear.bind(this);
     this.filterTodoNotCompleted = this.filterTodoNotCompleted.bind(this);
     //this.handleUpdate = this.handleUpdate(this);
+    this.selectCheckBox = this.selectCheckBox.bind(this);
   }
+
+  selectCheckBox = async () => {
+    const newFix = this.state.todos.map(_todo => {
+      const newT = {..._todo, completed: !this.state.checkAll}
+      return newT;
+    });
+    await this.setState({ checkAll:!this.state.checkAll });
+    await this.setState({ todos: newFix });
+    localStorage.setItem("todos", JSON.stringify(this.state.todos));
+  };
+
   handleTick = async (kaka) => {
     const uuid = uuidv4();
     const newApp = this.state.todos.map((todo) => {
@@ -109,7 +122,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <AddTodos addTodoFn={this.addTodo}></AddTodos>
+        <AddTodos addTodoFn={this.addTodo} checkAll={this.selectCheckBox}></AddTodos>
         <TodoList
           updateTodoFn={this.updateTodo}
           handleUpdate={this.handleUpdate}
