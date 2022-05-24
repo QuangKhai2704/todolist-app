@@ -2,7 +2,8 @@ import TodoList from "./components/TodoList";
 import AddTodos from "./components/AddTodos";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-
+import * as action from "./features/TodoSlice";
+import { connect } from "react-redux";
 
 const filterItem = (items = [], status = "") => {
   switch (status) {
@@ -24,12 +25,15 @@ class App extends React.Component {
       todos: [],
       todoFilter: [],
       trigger: false,
-      todoToShow: "all"
+      todoToShow: "all",
     };
     this.filterTodoCompleted = this.filterTodoCompleted.bind(this);
     this.filterClear = this.filterClear.bind(this);
     this.filterTodoNotCompleted = this.filterTodoNotCompleted.bind(this);
     //this.handleUpdate = this.handleUpdate(this);
+  }
+  componentDidMount() {
+    this.todos = this.props.todo;
   }
   handleTick = async (kaka) => {
     const uuid = uuidv4();
@@ -70,13 +74,12 @@ class App extends React.Component {
     localStorage.setItem("todos", JSON.stringify(this.state.todos));
   };
   handleDelete = async (hahaha) => {
-    
     const newFix = this.state.todos.filter((todo) => todo !== hahaha);
-    
+
     await this.setState({ todos: newFix });
-    localStorage.setItem("todos", JSON.stringify(this.state.todos));
+    this.props.action.pushTodo(this.state.todos);
   };
-  
+
   filterClear = () => {
     this.setState({ todoFilter: [] });
   };
@@ -102,7 +105,6 @@ class App extends React.Component {
       todoToShow: s,
     });
   };
-  
 
   render() {
     let todos = filterItem(this.state.todos, this.state.todoToShow);
@@ -146,15 +148,6 @@ class App extends React.Component {
     );
   }
 
-  componentDidMount = () => {
-    const todos = localStorage.getItem("todos");
-    if (todos) {
-      const savedTodos = JSON.parse(todos);
-      this.setState({ todos: savedTodos });
-    } else {
-      console.log("No todos");
-    }
-  };
   addTodo = async (todo) => {
     const uuid = uuidv4();
     await this.setState({
@@ -167,7 +160,7 @@ class App extends React.Component {
         },
       ],
     });
-    localStorage.setItem("todos", JSON.stringify(this.state.todos));
+    this.props.action.pushTodo(this.state.todos);
   };
   updateTodo = async (todo) => {
     const uuid = uuidv4();
@@ -181,7 +174,11 @@ class App extends React.Component {
       else return _todo;
     });
     await this.setState({ todos: newTodos });
-    localStorage.setItem("todos", JSON.stringify(this.state.todos));
+    this.props.action.pushTodo(this.state.todos);
   };
 }
-export default App;
+const mapStateToProps = (state) => ({
+  todo: state.todo.todos,
+});
+
+export default connect(mapStateToProps)(App);
